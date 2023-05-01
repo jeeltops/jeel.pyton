@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- <center> -->
+<h3> Registration</h3>	
+{{msg}}
+<div class="well">
+	<form class="form-horizontal" action="{% url 'register' %}" method="post">
+		{% csrf_token %}
+		<h4>Your personal information</h4>
+		<div class="control-group">
+			<label class="control-label" for="inputFname1">First name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputFname1" placeholder="First Name" name="first_name" >
+			</div>
+		 </div>
+		 <div class="control-group">
+			<label class="control-label" for="inputLnam">Last name <sup>*</sup></label>
+			<div class="controls">
+			  <input type="text" id="inputLnam" placeholder="Last Name" name="last_name" >
+			</div>
+		 </div>
+		<div class="control-group">
+		<label class="control-label" for="input_email">Email <sup>*</sup></label>
+		<div class="controls">
+		  <input type="text" id="input_email" placeholder="Email" name="email" >
+		</div>
+	  </div>	  
+	<div class="control-group">
+		<label class="control-label" for="inputPassword1">Password <sup>*</sup></label>
+		<div class="controls">
+		  <input type="password" id="inputPassword1" placeholder="Password" name="password" >
+		</div>
+	  </div>	
+	  <div class="control-group">
+		<label class="control-label" for="inputPassword1">repassword <sup>*</sup></label>
+		<div class="controls">
+		  <input type="password" id="inputPassword1" placeholder="repassword" name="repassword" >
+		</div>
+	  </div>	
+	  <div class="control-group">
+		<label class="control-label" ><sup>*</sup></label>
+		<div class="controls">
+		  <input type="submit" value="submit">
+		</div>
+	  </div>
+    <!-- </center> -->
+</body>
+</html>

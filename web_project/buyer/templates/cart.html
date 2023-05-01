@@ -1,0 +1,126 @@
+{% extends 'header.html' %}
+{% load static %}
+
+	{% block content %}
+ 
+	<div class="page-head_agile_info_w3l">
+
+	</div>
+	<!-- //banner-2 -->
+	<!-- page -->
+	<div class="services-breadcrumb">
+		<div class="agile_inner_breadcrumb">
+			<div class="container">
+				<ul class="w3_short">
+					<li>
+						<a href="{% url 'index' %}">Home</a>
+						<i>|</i>
+					</li>
+					<!-- <li>Checkout</li> -->
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- //page -->
+	<!-- checkout page -->
+	<div class="privacy">
+		<div class="container">
+			<!-- tittle heading -->
+			<!-- <h3 class="tittle-w3l">Checkout
+				<span class="heading-style">
+					<i></i>
+					<i></i>
+					<i></i>
+				</span> -->
+			</h3>
+			<!-- //tittle heading -->
+			<div class="checkout-right">
+				<!-- <h4>Your shopping cart contains:
+					<span>3 Products</span>
+				</h4> -->
+				<div class="table-responsive">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								
+								<th>Picture</th>
+								<th>Product Name</th>
+								<th>Price</th>
+								<th>Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							{% for i in my_cart_data %}
+							<tr class="rem1">
+								<td class="invert-image">
+									<a href="single2.html">
+										<img src="{{i.pic.url}}" style="max-height: 100px; max-width: 100px;" alt=" " class="img-responsive">
+									</a>
+								</td>
+								
+								<td class="invert">{{i.product_name}}</td>
+								<br>
+								<td class="invert">${{i.price}}</td>
+								<br>
+								<td class="invert">
+									<button><a href="{% url 'del_cart_item' i.id %}" >Delete</a></button>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<h3>You Have to Pay : ${{total_amount}}</h3>
+
+
+	<div class="checkout-right-basket">
+		<button id="pay-btn" >Make A Payment</button>
+	</div>
+	<!-- //checkout page -->
+	
+
+
+	
+	<!-- Razorpay's Javascript code. -->
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+	<script>
+		var options = {
+		
+		// Enter the Key ID generated from the Dashboard
+		key: "{{ razorpay_merchant_key }}",
+		
+		// Amount is in currency subunits.
+		// Default currency is INR. Hence,
+		// 50000 refers to 50000 paise
+		amount: "{{ razorpay_amount }}",
+		currency: "{{ currency }}",
+		
+		// Your/store name.
+		name: "Dj Razorpay",
+		
+		// Pass the `id` obtained in the response of Step 1
+		order_id: "{{ razorpay_order_id }}",
+		callback_url: "{{ callback_url }}",
+		};
+		
+		// initialise razorpay with the options.
+		var rzp1 = new Razorpay(options);
+		
+		// add event listener to the payment button.
+		document.getElementById("pay-btn").onclick = function (e) {
+		rzp1.open();
+		e.preventDefault();
+		};
+	</script>
+	
+	
+
+
+
+
+		{% endblock %}
